@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<sample num="1">
+  <node1>value1</node1>
+  <node1>value2</node1>
+  <node1>
+    <node2>value3.1</node2>
+  </node1>
+</sample>

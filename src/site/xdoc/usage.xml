@@ -1,0 +1,90 @@
+<document>
+<properties>
+  <author email="dwayneb@users.sourceforge.net">David Bernard</author>
+  </properties>
+  <meta name="keyword" content="java, spoon, spoonlet, maven"/>
+ <body>
+ <section name="Usage">
+ The plugin need jdk 1.5+ to run (like Spoon).
+ <subsection name="Add the plugin to pom">
+ <source><![CDATA[
+ <project>
+...
+  <build>
+    <plugins>
+...
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>net.sf.alchim</groupId>
+        <artifactId>spoon-maven-plugin</artifactId>
+        <version>0.5</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>recompile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+...
+    </plugins>
+  </build>
+</project>
+]]> </source>
+ <p><a href="plugin-info.html">See the goals of the plugin</a> to find the right goal for your case, and associated configuration.</p>
+</subsection>
+
+<subsection name="Add the repository to the pom">
+  <p>The plugin isn't (currently) deploy on central repo or codehaus repo. It will for version 1.0.
+  So to use it, you must add our repository. Our repository, also host spoon and somme spoonlet like vsuite, aval, fractel.</p>
+<source><![CDATA[
+<project>
+...
+  <pluginRepositories>
+...
+    <pluginRepository>
+        <id>alchim.releases</id>
+        <url>http://alchim.sf.net/download/releases</url>
+        <snapshots/>
+        <releases/>
+    </pluginRepository>
+...
+  </pluginRepositories>
+...
+</project>
+]]></source>
+
+</subsection>
+
+<subsection name="Configure the spoonlets">
+<p>Create a spoon.cfg.xml file in the same directory as pom.xml. The file list the spoonlets to apply during the build.</p>
+<source><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<spoon>
+  <-- list of repository where to search/download spoonlets -->
+  <repository url="http://alchim.sf.net/download/"/>
+
+  <-- list of spoonlets to apply -->
+  <spoonlet artifactId="vsuite-findbugs" groupId="spoon.spoonlet" version="0.3b2"/>
+  <spoonlet artifactId="vsuite-common" groupId="spoon.spoonlet" version="0.3b2"/>
+  <!--
+   Other spoonlets
+  <spoonlet artifactId="alchim-param" groupId="net.sf.alchim" version="1.0-SNAPSHOT"/>
+  <spoonlet artifactId="fraclet-annotation" groupId="org.objectweb.fractal.fraclet" version="2.1-SNAPSHOT"/>
+  -->
+
+  <!-- list of processor to enable/disable or reconfigure (same syntax as spoon.xml) -->
+  <processor class="spoon.vsuite.common.DocProcessor" active="false"/>
+</spoon>
+]]></source>
+</subsection>
+</section>
+</body>
+</document>
