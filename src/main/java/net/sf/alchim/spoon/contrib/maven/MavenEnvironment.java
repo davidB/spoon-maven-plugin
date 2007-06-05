@@ -10,7 +10,7 @@ import spoon.support.StandardEnvironment;
 
 @SuppressWarnings("serial")
 class MavenEnvironment extends StandardEnvironment {
-    private Log logger_;
+    private final Log logger_;
 
     public MavenEnvironment(Log log) {
         logger_ = log;
@@ -21,6 +21,7 @@ class MavenEnvironment extends StandardEnvironment {
         logger_.debug(msg);
     }
 
+    @SuppressWarnings("unchecked")
     @Override()
     public void report(Processor processor, Severity severity, CtElement element, String message) {
         String msg = processor.getClass().getSimpleName() + ">>" + element.getPosition().getFile().getAbsolutePath() + "@[" + element.getPosition().getLine() + "," + element.getPosition().getColumn() + "]:" + message;
@@ -33,8 +34,9 @@ class MavenEnvironment extends StandardEnvironment {
         }
     }
 
+    @Override
     public FileGenerator<? extends CtElement> getDefaultFileGenerator() {
-        return (FileGenerator<? extends CtElement>) super.getDefaultFileGenerator();
+        return super.getDefaultFileGenerator();
     }
 
 }

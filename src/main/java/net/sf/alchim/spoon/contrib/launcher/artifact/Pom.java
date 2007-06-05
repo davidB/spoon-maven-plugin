@@ -8,7 +8,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 class Pom {
-    private File file_;
+    private final File file_;
 
     private Node rootNode_; // lazy loading
 
@@ -65,14 +65,15 @@ class Pom {
             if ("test".equals(scope) || "provided".equals(scope) || "system".equals(scope)) {
                 continue;
             }
+
             String groupId = DomHelper.findFirstValue(element, "groupId");
             if (groupId.equals("${project.groupId}")) {
                 groupId = findGroupId();
             }
+
             String artifactId = DomHelper.findFirstValue(element, "artifactId");
 
             String version = DomHelper.findFirstValue(element, "artifactId");
-            ;
             if (version.equals("${project.version}")) {
                 version = findVersion();
             } else if (null == version) {

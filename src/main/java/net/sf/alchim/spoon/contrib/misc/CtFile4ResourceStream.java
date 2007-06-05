@@ -7,10 +7,10 @@ import spoon.support.builder.CtFolder;
 
 public class CtFile4ResourceStream implements CtFile {
 
-    private String name_;
-    private String rpath_;
+    private final String name_;
+    private final String rpath_;
 
-    public CtFile4ResourceStream(Class clazz) throws Exception {
+    public CtFile4ResourceStream(Class<?> clazz) throws Exception {
         this(clazz.getName());
     }
 
@@ -56,7 +56,7 @@ public class CtFile4ResourceStream implements CtFile {
     public String getPath() {
         return getName();
     }
-    
+
     public CtFolder getParent() {
         return null;
     }

@@ -75,8 +75,7 @@ public class SubLauncher {
             // ClasspathHelper.setClasspathProperty(null);
             // String classpath = ClasspathHelper.toClasspathString(null);
             // System.setProperty("java.class.path", classpath);
-            env_.debugMessage("classpath :"
-                    + System.getProperty("java.class.path"));
+            env_.debugMessage("classpath :" + System.getProperty("java.class.path"));
             Builder builder = new SpoonBuildingManager(factory_);
             for (String path : sources_) {
                 File file = new File(path);
@@ -102,8 +101,7 @@ public class SubLauncher {
         // processing (consume all the processors)
         ProcessingManager processing = new QueueProcessingManager(factory_);
         for (String processorName : processors_) {
-            env_.debugMessage("loading processor "
-                    + processorName);
+            env_.debugMessage("loading processor " + processorName);
             // processing.addProcessor((Processor) Class.forName(processorName,
             // true,
             // Thread.currentThread().getContextClassLoader()).newInstance());
@@ -124,8 +122,7 @@ public class SubLauncher {
             searchSpoonlets(spoonlet);
         }
         // override previous processors and templates configuration
-        if ((cfg != null)
-                && cfg.exists()) {
+        if ((cfg != null) && cfg.exists()) {
             SpoonletXmlHandler.load(new CtFileFile(cfg), factory_, processors_, ctTemplates_, null);
         }
     }
@@ -134,8 +131,7 @@ public class SubLauncher {
      * Load content of spoonlet file (template and processor list).
      */
     protected void searchSpoonlets(File jar) throws Exception {
-        env_.debugMessage("search spoonlets from :"
-                + jar);
+        env_.debugMessage("search spoonlets from :" + jar);
         CtFolder folder = new CtFolderZip(jar);
         List<CtResource> spoonletIndex = new ArrayList<CtResource>();
         CtFile configFile = null;

@@ -90,8 +90,8 @@ public class ClasspathHelper {
     private static void listJarResources(URL jarUrl, List<URL> resources) throws Exception {
         JarURLConnection jarConnection = (JarURLConnection) jarUrl.openConnection();
 
-        for (Enumeration entries = jarConnection.getJarFile().entries(); entries.hasMoreElements();) {
-            JarEntry entry = (JarEntry) entries.nextElement();
+        for (Enumeration<JarEntry> entries = jarConnection.getJarFile().entries(); entries.hasMoreElements();) {
+            JarEntry entry = entries.nextElement();
             resources.add(new URL(jarUrl, entry.getName()));
         }
     }

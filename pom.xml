@@ -16,9 +16,9 @@
     </license>
   </licenses>
   <scm>
-    <connection>scm:svn:https://svn.sourceforge.net/svnroot/alchim/${artifactId}/trunk</connection>
-    <developerConnection>scm:svn:https://${username}@svn.sourceforge.net/svnroot/alchim/${artifactId}/trunk</developerConnection>
-    <url>https://svn.sourceforge.net/svnroot/alchim/${artifactId}/trunk</url>
+    <connection>scm:hg:http://alchim.sf.net/hg/${artifactId}</connection>
+    <developerConnection>scm:hg:http://alchim.sf.net/hg/${artifactId}</developerConnection>
+    <url>http://alchim.sf.net/hg/${artifactId}</url>
   </scm>
   <organization>
     <name>Alchim Team</name>
