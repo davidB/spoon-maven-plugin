@@ -24,7 +24,7 @@
       <plugin>
         <groupId>net.sf.alchim</groupId>
         <artifactId>spoon-maven-plugin</artifactId>
-        <version>0.5-SNAPSHOT</version>
+        <version>0.5</version>
         <executions>
           <execution>
             <goals>
@@ -43,7 +43,7 @@
 
 <subsection name="Add the repository to the pom">
   <p>The plugin isn't (currently) deploy on central repo or codehaus repo. It will for version 1.0.
-  So to use it, you must add our repository. Our repository, also host spoon and somme spoonlet like vsuite, aval, fractel.</p>
+  So to use it, you must add our repository. Our repository, also host a snapshots of fraclet-annotation.</p>
 <source><![CDATA[
 <project>
 ...
@@ -54,12 +54,13 @@
         <url>http://alchim.sf.net/download/releases</url>
         <releases/>
     </pluginRepository>
-    <!-- only if you use a SNAPSHOT version of the plugin -->
+    <!-- only if you use a SNAPSHOT version of the plugin
     <pluginRepository>
         <id>alchim.snapshots</id>
         <url>http://alchim.sf.net/download/snapshots</url>
         <snapshots/>
     </pluginRepository>
+    -->
 ...
   </pluginRepositories>
 ...
