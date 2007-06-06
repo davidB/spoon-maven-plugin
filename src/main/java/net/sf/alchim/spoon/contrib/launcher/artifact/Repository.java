@@ -122,7 +122,7 @@ public class Repository {
         }
         back = back && artifact.jar.exists();
         if (artifact.md5.exists()) {
-            back = back && MD5Helper.checksum(artifact.jar, artifact.md5);
+            back = back && !MD5Helper.checksum(artifact.jar, artifact.md5);
         }
         return back;
     }
