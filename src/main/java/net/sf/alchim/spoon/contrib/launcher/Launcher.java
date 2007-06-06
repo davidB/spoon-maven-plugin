@@ -26,9 +26,9 @@ import org.codehaus.classworlds.ClassWorld;
  */
 public class Launcher {
 
-    public final static String SPOON_CFG = "net.sf.alchim.spoon.cfg";
+    public final static String SPOON_CFG = "spoon.cfg";
 
-    public static final String SRC_ROOTS = "net.sf.alchim.spoon.src.roots";
+    public static final String SRC_ROOTS = "spoon.src.roots";
 
     private List<String> sources_ = new ArrayList<String>();
 
@@ -97,7 +97,7 @@ public class Launcher {
     protected File searchConfig() throws Exception {
         String cfgPath = System.getProperty(SPOON_CFG);
         if (cfgPath == null) {
-            cfgPath = System.getProperty("user.dir") + "/net.sf.alchim.spoon.cfg.xml";
+            cfgPath = System.getProperty("user.dir") + "/spoon.cfg.xml";
         }
         File cfg = new File(cfgPath);
         if (!cfg.exists()) {
@@ -144,12 +144,12 @@ public class Launcher {
         ClassWorld world = new ClassWorld();
         // use the existing ContextClassLoader in a realm of the classloading
         // space
-        ClassRealm realm = world.newRealm("net.sf.alchim.spoon.container", Thread.currentThread().getContextClassLoader());
+        ClassRealm realm = world.newRealm("spoon.container", Thread.currentThread().getContextClassLoader());
         // create another realm for just the jars we have downloaded on-the-fly
         // and make
         // sure it is in a child-parent relationship with the current
         // ContextClassLoader
-        ClassRealm spoonletsRealm = realm.createChildRealm("net.sf.alchim.spoon.spoonlets");
+        ClassRealm spoonletsRealm = realm.createChildRealm("spoon.spoonlets");
         spoonletsRealm.setParent(realm);
 
         // add all the jars we just downloaded to the new child realm

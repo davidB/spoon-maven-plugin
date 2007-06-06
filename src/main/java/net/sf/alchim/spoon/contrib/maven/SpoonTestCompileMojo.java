@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Apply a set of spoonlet on test source.
- * 
+ *
  * @goal test-run
  * @phase generate-test-sources
  * @requiresDependencyResolution test
@@ -13,8 +13,8 @@ import java.util.List;
 public class SpoonTestCompileMojo extends AbstractSpoonMojo {
     /**
      * The directory for generated java files.
-     * 
-     * @parameter expression="${project.build.directory}/generated-test-sources/net.sf.alchim.spoon"
+     *
+     * @parameter expression="${project.build.directory}/generated-test-sources/spoon"
      * @required
      * @readonly
      */
@@ -23,7 +23,7 @@ public class SpoonTestCompileMojo extends AbstractSpoonMojo {
     @SuppressWarnings("unchecked")
     @Override()
     protected List<String> getSourceRoots() throws Exception {
-        return (List<String>) project.getTestCompileSourceRoots();
+        return project.getTestCompileSourceRoots();
     }
 
     @Override
@@ -34,7 +34,7 @@ public class SpoonTestCompileMojo extends AbstractSpoonMojo {
     @SuppressWarnings("unchecked")
     @Override
     protected List<String> getCompileDependencies() throws Exception {
-        return (List<String>) project.getTestClasspathElements();
+        return project.getTestClasspathElements();
     }
 
 }

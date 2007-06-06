@@ -73,7 +73,7 @@ class Pom {
 
             String artifactId = DomHelper.findFirstValue(element, "artifactId");
 
-            String version = DomHelper.findFirstValue(element, "artifactId");
+            String version = DomHelper.findFirstValue(element, "version");
             if (version.equals("${project.version}")) {
                 version = findVersion();
             } else if (null == version) {

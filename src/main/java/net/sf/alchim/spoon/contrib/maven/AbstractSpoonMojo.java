@@ -44,22 +44,22 @@ public abstract class AbstractSpoonMojo extends AbstractMojo {
     /**
      * Set to true to show messages about what the compiler is doing.
      *
-     * @parameter expression="${maven.spoon.cfg}" default-value="${basedir}/net.sf.alchim.spoon.cfg.xml"
+     * @parameter expression="${maven.spoon.cfg}" default-value="${basedir}/spoon.cfg.xml"
      */
     protected File cfg;
-    
+
     /**
      * @parameter expression="${project}"
      * @required
      */
     protected MavenProject project;
-    
+
     abstract protected List<String> getSourceRoots() throws Exception;
     abstract protected File getOutputDir() throws Exception;
-    
+
     @SuppressWarnings("unchecked")
     protected List<String> getCompileDependencies() throws Exception {
-        return (List<String>) project.getCompileClasspathElements();
+        return project.getCompileClasspathElements();
     }
 
     public void execute() throws MojoExecutionException {
@@ -91,7 +91,7 @@ public abstract class AbstractSpoonMojo extends AbstractMojo {
             l.add(getOutputDir().getAbsolutePath());
         }
     }
-    
+
     private void executeBasic() throws Throwable {
         Launcher launcher = new Launcher();
         launcher.run(cfg, getSourceRoots(), getCompileDependencies(), newEnvironment());

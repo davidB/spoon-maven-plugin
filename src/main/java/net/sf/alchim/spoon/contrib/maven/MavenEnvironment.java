@@ -2,6 +2,7 @@ package net.sf.alchim.spoon.contrib.maven;
 
 import org.apache.maven.plugin.logging.Log;
 
+import spoon.processing.FileGenerator;
 import spoon.processing.ProblemFixer;
 import spoon.processing.Processor;
 import spoon.processing.Severity;
@@ -104,10 +105,9 @@ class MavenEnvironment extends StandardEnvironment {
     public void reportProgressMessage(String message) {
         logger_.info(message);
     }
-/*
+
     @Override
     public FileGenerator<? extends CtElement> getDefaultFileGenerator() {
         return super.getDefaultFileGenerator();
     }
-*/
 }

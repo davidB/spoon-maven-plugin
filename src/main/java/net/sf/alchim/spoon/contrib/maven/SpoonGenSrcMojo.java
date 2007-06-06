@@ -13,7 +13,7 @@ public class SpoonGenSrcMojo extends AbstractSpoonMojo {
     /**
      * The directory for generated java files.
      *
-     * @parameter expression="${project.build.directory}/generated-sources/net.sf.alchim.spoon"
+     * @parameter expression="${project.build.directory}/generated-sources/spoon"
      * @required
      * @readonly
      */
@@ -23,7 +23,7 @@ public class SpoonGenSrcMojo extends AbstractSpoonMojo {
      * Set to false, if you don't want to generate java sources file
      * (usefull, if only use spoonlet as Analyzer).
      *
-     * @parameter expression="${net.sf.alchim.spoon.generate-sources}" default="true"
+     * @parameter expression="${spoon.generate-sources}" default="true"
      * @required
      * @readonly
      */
@@ -32,7 +32,7 @@ public class SpoonGenSrcMojo extends AbstractSpoonMojo {
     @SuppressWarnings("unchecked")
     @Override
     protected List<String> getSourceRoots() throws Exception {
-        return (List<String>)project.getCompileSourceRoots();
+        return project.getCompileSourceRoots();
     }
 
     @Override

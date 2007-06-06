@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import net.sf.alchim.spoon.contrib.maven.MyByteCodeOutputProcessor;
-
 import spoon.processing.Builder;
 import spoon.processing.Environment;
 import spoon.processing.ProcessingManager;
@@ -21,6 +19,8 @@ import spoon.support.builder.SpoonBuildingManager;
 import spoon.support.builder.support.CtFileFile;
 import spoon.support.builder.support.CtFolderFile;
 import spoon.support.builder.support.CtFolderZip;
+
+import net.sf.alchim.spoon.contrib.maven.MyByteCodeOutputProcessor;
 
 /**
  * Apply a set of spoonlet and Spoon's processor.
@@ -105,7 +105,8 @@ public class SubLauncher {
             // processing.addProcessor((Processor) Class.forName(processorName,
             // true,
             // Thread.currentThread().getContextClassLoader()).newInstance());
-            processing.addProcessor((Processor<?>) Thread.currentThread().getContextClassLoader().loadClass(processorName).newInstance());
+            Processor<?> p = (Processor<?>) Thread.currentThread().getContextClassLoader().loadClass(processorName).newInstance();
+            processing.addProcessor(p);
             // processing.addProcessor(processorName);
         }
         if (env_.getDefaultFileGenerator() != null) {
@@ -138,7 +139,7 @@ public class SubLauncher {
         for (CtFile file : folder.getAllFiles()) {
             if (file.isJava()) {
                 spoonletIndex.add(file);
-            } else if (file.getName().endsWith("net.sf.alchim.spoon.xml")) {
+            } else if (file.getName().endsWith("spoon.xml")) {
                 // Loading spoonlet properties
                 configFile = file;
             }

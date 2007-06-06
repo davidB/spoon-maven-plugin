@@ -18,7 +18,7 @@ public class SpoonCompileMojo extends AbstractSpoonMojo {
     /**
      * The directory for generated java files.
      *
-     * @parameter expression="${project.build.directory}/generated-sources/net.sf.alchim.spoon"
+     * @parameter expression="${project.build.directory}/generated-sources/spoon"
      * @required
      * @readonly
      */
