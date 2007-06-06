@@ -24,7 +24,7 @@
       <plugin>
         <groupId>net.sf.alchim</groupId>
         <artifactId>spoon-maven-plugin</artifactId>
-        <version>0.5</version>
+        <version>0.5-SNAPSHOT</version>
         <executions>
           <execution>
             <goals>
@@ -50,10 +50,15 @@
   <pluginRepositories>
 ...
     <pluginRepository>
-        <id>alchim.releases</id>
+        <id>alchim</id>
         <url>http://alchim.sf.net/download/releases</url>
-        <snapshots/>
         <releases/>
+    </pluginRepository>
+    <!-- only if you use a SNAPSHOT version of the plugin -->
+    <pluginRepository>
+        <id>alchim.snapshots</id>
+        <url>http://alchim.sf.net/download/snapshots</url>
+        <snapshots/>
     </pluginRepository>
 ...
   </pluginRepositories>
@@ -69,15 +74,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <spoon>
   <-- list of repository where to search/download spoonlets -->
-  <repository url="http://alchim.sf.net/download/"/>
+  <!--repository url="http://alchim.sf.net/download/snapshots"/-->
+  <repository url="http://maven-repo.gforge.inria.fr/releases"/>
 
   <-- list of spoonlets to apply -->
-  <spoonlet artifactId="vsuite-findbugs" groupId="spoon.spoonlet" version="0.3b2"/>
-  <spoonlet artifactId="vsuite-common" groupId="spoon.spoonlet" version="0.3b2"/>
+  <spoonlet artifactId="vsuite-findbugs" groupId="spoon.spoonlet" version="0.4b"/>
+  <spoonlet artifactId="vsuite-common" groupId="spoon.spoonlet" version="0.4b"/>
   <!--
    Other spoonlets
   <spoonlet artifactId="alchim-param" groupId="net.sf.alchim" version="1.0-SNAPSHOT"/>
-  <spoonlet artifactId="fraclet-annotation" groupId="org.objectweb.fractal.fraclet" version="2.1-SNAPSHOT"/>
+  <spoonlet artifactId="fraclet-annotation" groupId="org.objectweb.fractal.fraclet" version="2.1.1-SNAPSHOT"/>
   -->
 
   <!-- list of processor to enable/disable or reconfigure (same syntax as spoon.xml) -->
