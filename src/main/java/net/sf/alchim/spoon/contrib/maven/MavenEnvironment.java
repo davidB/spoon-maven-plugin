@@ -110,4 +110,12 @@ class MavenEnvironment extends StandardEnvironment {
     public FileGenerator<? extends CtElement> getDefaultFileGenerator() {
         return super.getDefaultFileGenerator();
     }
+
+    public boolean hasWarning() throws Exception {
+        return warningCount_ > 0;
+    }
+
+    public boolean hasError() throws Exception {
+        return errorCount_ > 0;
+    }
 }

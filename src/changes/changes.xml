@@ -10,11 +10,12 @@
       <action dev="dwayneb" type="add">generate an xml report for integration with external tool (like QALab)</action>
       <action dev="dwayneb" type="add">generate an html/xdoc report for integration with the site (like other static analyser : pmd, checkstyle,...)</action>
       <action dev="dwayneb" type="add">more test</action>
-      <action dev="dwayneb" type="add">add option to stop maven processing if WARNING or ERROR are reported by Spoonlet(s)</action>
       <action dev="dwayneb" type="add">add option to stop maven processing if Spoon building failed (pre-compilation by JDTCompiler)</action>
       <action dev="dwayneb" type="add">add logging information (about download,...)</action>
     </release>
-    <release version="0.5" date="2007-06-05" description="spoon-1.2">
+    <release version="0.5" date="2007-06-06" description="spoon-1.2">
+      <action dev="dwayneb" type="add">add option to stop maven processing if WARNING or ERROR are reported by Spoonlet(s)</action>
+      <action dev="dwayneb" type="fix">use maven logger for every report (include new from spoon-core-1.2)</action>
       <action dev="dwayneb" type="update">change scm from subversion (svn) to mercurial (hg)</action>
       <action dev="dwayneb" type="fix">move to spoon-core-1.2.</action>
       <action dev="dwayneb" type="fix">change the groupId from spoon.contrib to net.sf.alchim to follow Maven's convention</action>

@@ -1,17 +1,16 @@
 package net.sf.alchim.spoon.contrib.maven;
 
 
-import net.sf.alchim.spoon.contrib.launcher.Launcher;
+import java.io.File;
+import java.util.List;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 
-import spoon.processing.Environment;
 import spoon.support.JavaOutputProcessor;
 
-import java.io.File;
-import java.util.List;
+import net.sf.alchim.spoon.contrib.launcher.Launcher;
 
 /**
  * Apply a set of spoonlet and Spoon's processor.
@@ -20,7 +19,6 @@ public abstract class AbstractSpoonMojo extends AbstractMojo {
 
     /**
      * Set the jdk compliance level.
-     * The default value is 5.
      *
      * @parameter expression="${maven.spoon.compliance}" default-value="5"
      */
@@ -28,7 +26,6 @@ public abstract class AbstractSpoonMojo extends AbstractMojo {
 
     /**
      * Set to true to include debugging information in the compiled class files.
-     * The default value is true.
      *
      * @parameter expression="${maven.spoon.debug}" default-value="false"
      */
@@ -49,6 +46,20 @@ public abstract class AbstractSpoonMojo extends AbstractMojo {
     protected File cfg;
 
     /**
+     * Set to true to stop the build if spoon generated warnings
+     *
+     * @parameter expression="${maven.spoon.failOnWarning}" default-value="false"
+     */
+    protected boolean failOnWarning;
+
+    /**
+     * Set to true to stop the build if spoon generated warnings
+     *
+     * @parameter expression="${maven.spoon.failOnError}" default-value="true"
+     */
+    protected boolean failOnError;
+
+    /**
      * @parameter expression="${project}"
      * @required
      */
@@ -66,12 +77,14 @@ public abstract class AbstractSpoonMojo extends AbstractMojo {
         try {
             executeBasic();
             updateSourceRoots();
+        } catch (MojoExecutionException exc) {
+            throw exc;
         } catch (Throwable exc) {
             throw new MojoExecutionException("fail to execute", exc);
         }
     }
 
-    protected Environment newEnvironment() throws Exception {
+    protected MavenEnvironment newEnvironment() throws Exception {
         MavenEnvironment environment = new MavenEnvironment(getLog());
         environment.setComplianceLevel(compliance);
         environment.setVerbose(verbose || debug);
@@ -94,7 +107,14 @@ public abstract class AbstractSpoonMojo extends AbstractMojo {
 
     private void executeBasic() throws Throwable {
         Launcher launcher = new Launcher();
-        launcher.run(cfg, getSourceRoots(), getCompileDependencies(), newEnvironment());
+        MavenEnvironment env = newEnvironment();
+        launcher.run(cfg, getSourceRoots(), getCompileDependencies(), env);
+        if (failOnError && env.hasError()) {
+            throw new MojoExecutionException("spoon generate some errors");
+        }
+        if (failOnWarning && env.hasWarning()) {
+            throw new MojoExecutionException("spoon generate some warnings");
+        }
     }
 
 }

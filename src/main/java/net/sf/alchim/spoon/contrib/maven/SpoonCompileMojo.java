@@ -3,7 +3,6 @@ package net.sf.alchim.spoon.contrib.maven;
 import java.io.File;
 import java.util.List;
 
-import spoon.processing.Environment;
 import spoon.processing.FileGenerator;
 import spoon.support.JavaOutputProcessor;
 
@@ -45,8 +44,8 @@ public class SpoonCompileMojo extends AbstractSpoonMojo {
     }
 
     @Override
-    protected Environment newEnvironment() throws Exception {
-        Environment environment = super.newEnvironment();
+    protected MavenEnvironment newEnvironment() throws Exception {
+        MavenEnvironment environment = super.newEnvironment();
         FileGenerator<?> printer = environment.getDefaultFileGenerator();
         environment.setDefaultFileGenerator(new MyByteCodeOutputProcessor((JavaOutputProcessor) printer, outputDirectory));
         return environment;
