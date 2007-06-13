@@ -143,7 +143,6 @@ public class SubLauncher {
         CtFile configFile = null;
         for (CtFile file : folder.getAllFiles()) {
             if (file.isJava()) {
-                System.out.println("add template :" + file.getName() + " :: " + file.getPath());
                 spoonletIndex.add(file);
             } else if (file.getName().endsWith("spoon.xml")) {
                 // Loading spoonlet properties
