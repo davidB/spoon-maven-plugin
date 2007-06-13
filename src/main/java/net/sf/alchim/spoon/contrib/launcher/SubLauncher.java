@@ -133,11 +133,17 @@ public class SubLauncher {
      */
     protected void searchSpoonlets(File jar) throws Exception {
         env_.debugMessage("search spoonlets from :" + jar);
-        CtFolder folder = new CtFolderZip(jar);
-        List<CtResource> spoonletIndex = new ArrayList<CtResource>();
+        CtFolder folder = null;
+        if (jar.isFile()) {
+            folder = new CtFolderZip(jar);
+        } else {
+            folder = new CtFolderFile(jar);
+        }
+        List<CtFile> spoonletIndex = new ArrayList<CtFile>();
         CtFile configFile = null;
         for (CtFile file : folder.getAllFiles()) {
             if (file.isJava()) {
+                System.out.println("add template :" + file.getName() + " :: " + file.getPath());
                 spoonletIndex.add(file);
             } else if (file.getName().endsWith("spoon.xml")) {
                 // Loading spoonlet properties

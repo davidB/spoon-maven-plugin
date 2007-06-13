@@ -17,7 +17,7 @@ public class SpoonGenSrcMojo extends AbstractSpoonMojo {
      * @required
      * @readonly
      */
-    private File outputDirectory;
+    private File srcOutputDirectory;
 
     /**
      * Set to false, if you don't want to generate java sources file
@@ -36,10 +36,15 @@ public class SpoonGenSrcMojo extends AbstractSpoonMojo {
     }
 
     @Override
-    protected File getOutputDir() throws Exception {
+    protected File getSrcOutputDir() throws Exception {
         if (generateSources) {
-            return outputDirectory;
+            return srcOutputDirectory;
         }
+        return null;
+    }
+
+    @Override
+    protected File getClassesOutputDir() throws Exception {
         return null;
     }
 }

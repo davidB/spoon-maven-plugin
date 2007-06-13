@@ -116,7 +116,7 @@ public class Repository {
     private boolean needDownload(Artifact artifact) throws Exception {
         boolean back = !artifact.getVersion().endsWith("-SNAPSHOT");
         back = back && artifact.pom.getFile().exists();
-        if (isRelocated(artifact)) {
+        if (!back && isRelocated(artifact)) {
             load(artifact);
             return false;
         }

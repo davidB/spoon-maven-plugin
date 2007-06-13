@@ -1,7 +1,5 @@
 package net.sf.alchim.spoon.contrib.launcher;
 
-import spoon.processing.Environment;
-
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
@@ -11,14 +9,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.codehaus.classworlds.ClassRealm;
+import org.codehaus.classworlds.ClassWorld;
+
+import spoon.processing.Environment;
+import spoon.processing.Severity;
 
 import net.sf.alchim.spoon.contrib.launcher.artifact.Artifact;
 import net.sf.alchim.spoon.contrib.launcher.artifact.Repository;
 import net.sf.alchim.spoon.contrib.misc.ClasspathHelper;
 import net.sf.alchim.spoon.contrib.misc.PathHelper;
-
-import org.codehaus.classworlds.ClassRealm;
-import org.codehaus.classworlds.ClassWorld;
 
 
 /**
@@ -69,6 +69,17 @@ public class Launcher {
         for(Artifact artifact: spoonletArtifacts) {
             spoonlets.add(artifact.getJar());
         }
+        // load local spoonlet
+        for (String dep : dependencies) {
+            File depFile = new File(dep);
+            log("search if spoon.xml in :" + depFile + " " + depFile.isDirectory());
+            if (depFile.isDirectory()) {
+                if (new File(depFile, "spoon.xml").exists()) {
+                    log("add local from :" + depFile);
+                    spoonlets.add(depFile);
+                }
+            }
+        }
 
         ClassRealm spoonletsRealm = defClassRealm(spoonletArtifacts, dependencies);
 
@@ -101,8 +112,10 @@ public class Launcher {
         }
         File cfg = new File(cfgPath);
         if (!cfg.exists()) {
-            log("no config file found");
+            env_.report(null, Severity.MESSAGE, "no config file found");
             return null;
+        } else {
+            env_.report(null, Severity.MESSAGE, "config file :" + cfg.getAbsolutePath());
         }
         return cfg;
     }

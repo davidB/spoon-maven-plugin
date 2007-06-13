@@ -6,11 +6,11 @@ import java.util.List;
 /**
  * Apply a set of spoonlet on test source.
  *
- * @goal test-recompile
- * @phase test-compile
+ * @goal test-generate
+ * @phase generate-test-sources
  * @requiresDependencyResolution test
  */
-public class SpoonTestCompileMojo extends AbstractSpoonMojo {
+public class SpoonTestGenSrcMojo extends AbstractSpoonMojo {
     /**
      * The directory for generated java files.
      *
@@ -19,16 +19,6 @@ public class SpoonTestCompileMojo extends AbstractSpoonMojo {
      * @readonly
      */
     private File srcOutputDirectory;
-
-    /**
-     * The directory for generated java files.
-     *
-     * @parameter expression="${project.build.directory}/test-classes"
-     * @required
-     * @readonly
-     */
-    private File classesOutputDirectory;
-
 
     @SuppressWarnings("unchecked")
     @Override()
@@ -49,7 +39,7 @@ public class SpoonTestCompileMojo extends AbstractSpoonMojo {
 
     @Override
     protected File getClassesOutputDir() throws Exception {
-        return classesOutputDirectory;
+        return null;
     }
 
 }

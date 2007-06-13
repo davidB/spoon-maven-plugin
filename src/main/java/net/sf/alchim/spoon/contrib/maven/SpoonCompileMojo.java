@@ -3,9 +3,6 @@ package net.sf.alchim.spoon.contrib.maven;
 import java.io.File;
 import java.util.List;
 
-import spoon.processing.FileGenerator;
-import spoon.support.JavaOutputProcessor;
-
 /**
  * Apply a set of spoonlets after compilation of original java, and recompile the resulting java files.
  *
@@ -21,7 +18,7 @@ public class SpoonCompileMojo extends AbstractSpoonMojo {
      * @required
      * @readonly
      */
-    private File outputSrcDirectory;
+    private File srcOutputDirectory;
 
     /**
      * The directory for generated java files.
@@ -30,7 +27,7 @@ public class SpoonCompileMojo extends AbstractSpoonMojo {
      * @required
      * @readonly
      */
-    private File outputDirectory;
+    private File classesOutputDirectory;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -39,20 +36,17 @@ public class SpoonCompileMojo extends AbstractSpoonMojo {
     }
 
     @Override
-    protected File getOutputDir() throws Exception {
-        return outputSrcDirectory;
-    }
-
-    @Override
-    protected MavenEnvironment newEnvironment() throws Exception {
-        MavenEnvironment environment = super.newEnvironment();
-        FileGenerator<?> printer = environment.getDefaultFileGenerator();
-        environment.setDefaultFileGenerator(new MyByteCodeOutputProcessor((JavaOutputProcessor) printer, outputDirectory));
-        return environment;
+    protected File getSrcOutputDir() throws Exception {
+        return srcOutputDirectory;
     }
 
     @Override
     protected void updateSourceRoots() throws Exception {
+    }
+
+    @Override
+    protected File getClassesOutputDir() throws Exception {
+        return classesOutputDirectory;
     }
 
 }

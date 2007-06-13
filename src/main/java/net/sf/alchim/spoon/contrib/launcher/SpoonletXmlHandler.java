@@ -42,7 +42,7 @@ import spoon.support.processing.XmlProcessorProperties;
  */
 public class SpoonletXmlHandler extends DefaultHandler {
 
-    public static void load(CtFile cfgFile, Factory factory, List<String> processors, Collection<CtResource> templates, List<CtResource> spoonletIndex) throws Exception {
+    public static void load(CtFile cfgFile, Factory factory, List<String> processors, Collection<CtResource> templates, List<CtFile> spoonletIndex) throws Exception {
         XMLReader xr = XMLReaderFactory.createXMLReader();
         SpoonletXmlHandler loader = new SpoonletXmlHandler(factory, processors, templates, spoonletIndex);
         xr.setContentHandler(loader);
@@ -51,7 +51,7 @@ public class SpoonletXmlHandler extends DefaultHandler {
         stream.close();
     }
 
-    private List<CtResource> spoonletIndex_;
+    private List<CtFile> spoonletIndex_;
 
     private XmlProcessorProperties prop_;
 
@@ -73,12 +73,12 @@ public class SpoonletXmlHandler extends DefaultHandler {
 
     /**
      * Creates a new handler.
-     * 
+     *
      * @param launcher
      *            the launcher
      * @param spoonletIndex ?
      */
-    public SpoonletXmlHandler(Factory factory, List<String> processors, Collection<CtResource> templates, List<CtResource> spoonletIndex) {
+    public SpoonletXmlHandler(Factory factory, List<String> processors, Collection<CtResource> templates, List<CtFile> spoonletIndex) {
         super();
         factory_ = factory;
         processors_ = processors;
@@ -134,15 +134,15 @@ public class SpoonletXmlHandler extends DefaultHandler {
             if (spoonletIndex_ != null) {
                 String path = attributes.getValue("path");
                 if (path != null) {
-                    for (CtResource r : spoonletIndex_) {
-                        if (r.getName().equals(path)) {
+                    for (CtFile r : spoonletIndex_) {
+                        if (r.getPath().endsWith(path)) {
                             templates_.add(r);
                         }
                     }
                 }
                 String folder = attributes.getValue("folder");
                 if (folder != null) {
-                    for (CtResource r : spoonletIndex_) {
+                    for (CtFile r : spoonletIndex_) {
                         if (r.getName().startsWith(folder)) {
                             templates_.add(r);
                         }

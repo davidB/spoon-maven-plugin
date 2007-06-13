@@ -8,6 +8,7 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 
+import spoon.processing.FileGenerator;
 import spoon.support.JavaOutputProcessor;
 
 import net.sf.alchim.spoon.contrib.launcher.Launcher;
@@ -16,6 +17,7 @@ import net.sf.alchim.spoon.contrib.launcher.Launcher;
  * Apply a set of spoonlet and Spoon's processor.
  */
 public abstract class AbstractSpoonMojo extends AbstractMojo {
+    protected boolean compileCode = false;
 
     /**
      * Set the jdk compliance level.
@@ -66,7 +68,8 @@ public abstract class AbstractSpoonMojo extends AbstractMojo {
     protected MavenProject project;
 
     abstract protected List<String> getSourceRoots() throws Exception;
-    abstract protected File getOutputDir() throws Exception;
+    abstract protected File getSrcOutputDir() throws Exception;
+    abstract protected File getClassesOutputDir() throws Exception;
 
     @SuppressWarnings("unchecked")
     protected List<String> getCompileDependencies() throws Exception {
@@ -89,19 +92,23 @@ public abstract class AbstractSpoonMojo extends AbstractMojo {
         environment.setComplianceLevel(compliance);
         environment.setVerbose(verbose || debug);
         environment.setDebug(debug);
-        File outputdir = getOutputDir();
+        File outputdir = getSrcOutputDir();
         if (outputdir != null) {
             // env_.setXmlRootFolder(getArguments().getFile("properties"));
             environment.setDefaultFileGenerator(new JavaOutputProcessor(outputdir));
+            if (getClassesOutputDir() != null) {
+                FileGenerator<?> printer = environment.getDefaultFileGenerator();
+                environment.setDefaultFileGenerator(new MyByteCodeOutputProcessor((JavaOutputProcessor) printer, getClassesOutputDir()));
+            }
         }
         return environment;
     }
 
     protected void updateSourceRoots() throws Exception {
         List<String> l = getSourceRoots();
-        if ((getOutputDir() != null) && (l != null)) {
+        if ((getSrcOutputDir() != null) && (l != null)) {
             l.clear();
-            l.add(getOutputDir().getAbsolutePath());
+            l.add(getSrcOutputDir().getAbsolutePath());
         }
     }
 
