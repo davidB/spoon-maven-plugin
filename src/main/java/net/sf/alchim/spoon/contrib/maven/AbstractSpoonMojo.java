@@ -9,6 +9,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 
 import spoon.processing.FileGenerator;
+import spoon.support.ByteCodeOutputProcessor;
 import spoon.support.JavaOutputProcessor;
 
 import net.sf.alchim.spoon.contrib.launcher.Launcher;
@@ -98,7 +99,7 @@ public abstract class AbstractSpoonMojo extends AbstractMojo {
             environment.setDefaultFileGenerator(new JavaOutputProcessor(outputdir));
             if (getClassesOutputDir() != null) {
                 FileGenerator<?> printer = environment.getDefaultFileGenerator();
-                environment.setDefaultFileGenerator(new MyByteCodeOutputProcessor((JavaOutputProcessor) printer, getClassesOutputDir()));
+                environment.setDefaultFileGenerator(new ByteCodeOutputProcessor((JavaOutputProcessor) printer, getClassesOutputDir()));
             }
         }
         return environment;

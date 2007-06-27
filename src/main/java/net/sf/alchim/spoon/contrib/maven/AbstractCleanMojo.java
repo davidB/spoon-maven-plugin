@@ -1,4 +1,4 @@
-package net.sf.alchim.spoon.contrib.maven;
+    package net.sf.alchim.spoon.contrib.maven;
 
 
 import net.sf.alchim.spoon.contrib.launcher.Launcher;
