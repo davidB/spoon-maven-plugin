@@ -20,8 +20,6 @@ import spoon.support.builder.support.CtFileFile;
 import spoon.support.builder.support.CtFolderFile;
 import spoon.support.builder.support.CtFolderZip;
 
-import net.sf.alchim.spoon.contrib.maven.MyByteCodeOutputProcessor;
-
 /**
  * Apply a set of spoonlet and Spoon's processor.
  */
@@ -53,11 +51,7 @@ public class SubLauncher {
         factory_ = new Factory(new DefaultCoreFactory(), env);
         env_.setFactory(factory_);
         if (env_.getDefaultFileGenerator() != null) {
-            if (env_.getDefaultFileGenerator() instanceof MyByteCodeOutputProcessor ) {
-                ((MyByteCodeOutputProcessor)env_.getDefaultFileGenerator()).updateFactory(factory_);
-            } else {
-                env_.getDefaultFileGenerator().setFactory(factory_);
-            }
+            env_.getDefaultFileGenerator().setFactory(factory_);
         }
 
         configureSpoonlets(cfg, spoonlets);

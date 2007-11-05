@@ -114,9 +114,8 @@ public class Launcher {
         if (!cfg.exists()) {
             env_.report(null, Severity.MESSAGE, "no config file found");
             return null;
-        } else {
-            env_.report(null, Severity.MESSAGE, "config file :" + cfg.getAbsolutePath());
         }
+        env_.report(null, Severity.MESSAGE, "config file :" + cfg.getAbsolutePath());
         return cfg;
     }
 

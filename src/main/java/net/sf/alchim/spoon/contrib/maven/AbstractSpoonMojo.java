@@ -68,6 +68,14 @@ public abstract class AbstractSpoonMojo extends AbstractMojo {
      */
     protected MavenProject project;
 
+    /**
+     * The path of the result/log of spoon compiler/analyzer.
+     *
+     * @parameter expression="${project.build.directory}/spoon-report.csv"
+     * @required
+     */
+    private File reportDataFile;
+
     abstract protected List<String> getSourceRoots() throws Exception;
     abstract protected File getSrcOutputDir() throws Exception;
     abstract protected File getClassesOutputDir() throws Exception;
@@ -89,7 +97,7 @@ public abstract class AbstractSpoonMojo extends AbstractMojo {
     }
 
     protected MavenEnvironment newEnvironment() throws Exception {
-        MavenEnvironment environment = new MavenEnvironment(getLog());
+        MavenEnvironment environment = new MavenEnvironment(getLog(), reportDataFile);
         environment.setComplianceLevel(compliance);
         environment.setVerbose(verbose || debug);
         environment.setDebug(debug);

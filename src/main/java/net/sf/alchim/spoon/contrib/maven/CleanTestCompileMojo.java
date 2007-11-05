@@ -6,7 +6,7 @@ import org.apache.maven.project.MavenProject;
 
 /**
  * Restore sourceDirectory to original.
- * 
+ *
  * @goal test-clean
  * @phase package
  *
@@ -20,7 +20,7 @@ public class CleanTestCompileMojo extends AbstractCleanMojo {
      */
     private MavenProject project;
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "cast" })
     @Override()
     protected List<String> getSourceRoots() throws Exception {
         return (List<String>)project.getTestCompileSourceRoots();

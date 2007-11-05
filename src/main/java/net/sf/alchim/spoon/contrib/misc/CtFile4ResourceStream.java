@@ -25,9 +25,8 @@ public class CtFile4ResourceStream implements CtFile {
         if (Thread.currentThread().getContextClassLoader().getResource(rpath) == null) {
             if (Thread.currentThread().getContextClassLoader().getResource(rpath+".txt") == null) {
                 throw new IllegalArgumentException("resource not found for :" + rpath);
-            } else {
-                rpath = rpath +".txt";
             }
+            rpath = rpath +".txt";
         }
         rpath_ = rpath;
         name_ = name;

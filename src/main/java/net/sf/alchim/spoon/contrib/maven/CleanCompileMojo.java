@@ -6,9 +6,9 @@ import org.apache.maven.project.MavenProject;
 
 /**
  * Restore sourceDirectory to original.
- * @goal clean 
+ * @goal clean
  * @phase compile
- * 
+ *
  * @author dwayne
  */
 public class CleanCompileMojo extends AbstractCleanMojo {
@@ -19,7 +19,7 @@ public class CleanCompileMojo extends AbstractCleanMojo {
      */
     private MavenProject project;
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "cast" })
     @Override
     protected List<String> getSourceRoots() throws Exception {
         return (List<String>)project.getCompileSourceRoots();

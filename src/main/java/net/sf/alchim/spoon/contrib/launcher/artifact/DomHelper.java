@@ -52,11 +52,10 @@ class DomHelper {
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 if (name.equals(node.getNodeName())) {
                     return (Element)node;
-                } else {
-                    Element el = findFirst(node, name);
-                    if (el != null) {
-                        return el;
-                    }
+                }
+                Element el = findFirst(node, name);
+                if (el != null) {
+                    return el;
                 }
             }
         }

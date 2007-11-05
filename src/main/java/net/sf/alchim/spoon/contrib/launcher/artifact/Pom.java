@@ -74,10 +74,10 @@ class Pom {
             String artifactId = DomHelper.findFirstValue(element, "artifactId");
 
             String version = DomHelper.findFirstValue(element, "version");
-            if (version.equals("${project.version}")) {
-                version = findVersion();
-            } else if (null == version) {
+            if (null == version) {
                 throw new IllegalStateException("no version for " + groupId + ':' + artifactId + " in POM (" + file_ + ") ");
+            } else if (version.equals("${project.version}")) {
+                version = findVersion();
             }
             Artifact dep = new Artifact(groupId, artifactId, version);
             dependencyList.add(dep);
