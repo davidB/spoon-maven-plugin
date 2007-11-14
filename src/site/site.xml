@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
   <bannerLeft>
-    <name>Spoon Maven Plugin (0.5)</name>
+    <name>Spoon Maven Plugin</name>
     <href>http://alchim.sf.net/spoon-maven-plugin</href>
   </bannerLeft>
   <bannerRight>
@@ -10,31 +10,23 @@
     <href>http://spoon.gforge.inria.fr/</href>
   </bannerRight>
   <publishDate position="left" format="yyyy-MM-dd HH:mm" />
-  <!--
-    <head>
-    <script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
-    </script>
-    <script type="text/javascript">
-    _uacct = "UA-140879-1";
-    urchinTracker();
-    </script>
-    </head>
-  -->
+  <version position="left"/>
+
   <poweredBy>
     <logo name="Hosted on SourceForge.net" href="http://sourceforge.net" img="http://sflogo.sourceforge.net/sflogo.php?group_id=65041&amp;type=2" />
     <logo name="Build with Maven 2" href="http://maven.apache.org" img="images/logos/maven-feather.png" />
-    <!--logo name="CC-GNU LGPL" href="http://creativecommons.org/licenses/LGPL/2.1/" img="http://creativecommons.org/images/public/cc-LGPL-a.png" /-->
+    <logo name="CC-GNU LGPL" href="http://creativecommons.org/licenses/LGPL/2.1/" img="http://creativecommons.org/images/public/cc-LGPL-a.png" />
   </poweredBy>
 
   <body>
     <links>
-      <item name="download" href="../download" />
+      <item name="download" href="../download/releases/" />
+      <item name="changelog" href="../hg/spoon-maven-plugin/"/>
       <item name="sourceforge" href="http://sf.net/projects/alchim" />
-      <item name="Maven 2" href="http://maven.apache.org/maven2/" />
     </links>
 
     <menu name="Overview">
-      <item name="Introduction" href="overview.html" />
+      <item name="Introduction" href="index.html" />
       <item name="Goals" href="plugin-info.html" />
       <item name="Usage" href="usage.html" />
       <!-- item name="FAQ" href="faq.html" /-->

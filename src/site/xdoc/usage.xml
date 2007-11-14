@@ -24,7 +24,7 @@
       <plugin>
         <groupId>net.sf.alchim</groupId>
         <artifactId>spoon-maven-plugin</artifactId>
-        <version>0.5</version>
+        <version>0.7</version>
         <executions>
           <execution>
             <goals>
@@ -36,37 +36,23 @@
 ...
     </plugins>
   </build>
+...
+  <reporting>
+    <plugins>
+...
+      <!-- generate an html report from spoonlet execution -->
+      <plugin>
+        <groupId>net.sf.alchim</groupId>
+        <artifactId>spoon-maven-plugin</artifactId>
+        <version>0.7</version>
+      </plugin>
+...      
+    </plugins>
+  </reporting>
+  
 </project>
 ]]> </source>
  <p><a href="plugin-info.html">See the goals of the plugin</a> to find the right goal for your case, and associated configuration.</p>
-</subsection>
-
-<subsection name="Add the repository to the pom">
-  <p>The plugin isn't (currently) deploy on central repo or codehaus repo. It will for version 1.0.
-  So to use it, you must add our repository. Our repository, also host a snapshots of fraclet-annotation.</p>
-<source><![CDATA[
-<project>
-...
-  <pluginRepositories>
-...
-    <pluginRepository>
-        <id>alchim</id>
-        <url>http://alchim.sf.net/download/releases</url>
-        <releases/>
-    </pluginRepository>
-    <!-- only if you use a SNAPSHOT version of the plugin
-    <pluginRepository>
-        <id>alchim.snapshots</id>
-        <url>http://alchim.sf.net/download/snapshots</url>
-        <snapshots/>
-    </pluginRepository>
-    -->
-...
-  </pluginRepositories>
-...
-</project>
-]]></source>
-
 </subsection>
 
 <subsection name="Configure the spoonlets">
@@ -75,20 +61,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <spoon>
   <-- list of repository where to search/download spoonlets -->
-  <!--repository url="http://alchim.sf.net/download/snapshots"/-->
   <repository url="http://maven-repo.gforge.inria.fr/releases"/>
+  <repository url="http://alchim.sf.net/download/releases"/>
 
   <-- list of spoonlets to apply -->
-  <spoonlet artifactId="vsuite-findbugs" groupId="spoon.spoonlet" version="0.4b"/>
-  <spoonlet artifactId="vsuite-common" groupId="spoon.spoonlet" version="0.4b"/>
-  <!--
-   Other spoonlets
-  <spoonlet artifactId="alchim-param" groupId="net.sf.alchim" version="1.0-SNAPSHOT"/>
-  <spoonlet artifactId="fraclet-annotation" groupId="org.objectweb.fractal.fraclet" version="2.1.1-SNAPSHOT"/>
-  -->
 
+  <spoonlet artifactId="alchim-codeplus" groupId="net.sf.alchim" version="0.4"/>
+  
   <!-- list of processor to enable/disable or reconfigure (same syntax as spoon.xml) -->
-  <processor class="spoon.vsuite.common.DocProcessor" active="false"/>
+
+  <processor name="Get &amp; Set Generator" class="net.sf.alchim.codeplus.spoonprocessor.StupidGetSetGenerator" active="true" doc="generate getter and setter for public fields">
+    <property name="generateOnlyOnAnnotation" doc="generate accessor for public field only when @GenStupidGetSet is present or always" value="false"/>
+  </processor>
+
+  <processor name="toString Generator" class="net.sf.alchim.codeplus.spoonprocessor.ToStringGenerator" active="false" doc="generate toString()"/>
+
+  <processor name="Empty Catch Checker" class="net.sf.alchim.codeplus.spoonchecker.EmptyCatchAnalyzer" active="false"/>
+  <processor name="Javadoc Checker" class="net.sf.alchim.codeplus.spoonchecker.JavadocAnalyzer" active="false"/>
+  <processor name="Empty method Checker" class="net.sf.alchim.codeplus.spoonchecker.EmptyMethodBodyAnalyzer" active="false"/>
+  <processor name="Package circular ref Checker" class="net.sf.alchim.codeplus.spoonchecker.CircularPackageDepAnalyzer" active="true"/>
+  <processor name="Type circular ref Checker" class="net.sf.alchim.codeplus.spoonchecker.TypeReferenceAnalyzer" active="true"/>
+  <processor name="Field name Checker" class="net.sf.alchim.codeplus.spoonchecker.FieldNameAnalyzer" active="false"/>
+
 </spoon>
 ]]></source>
 </subsection>
