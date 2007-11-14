@@ -143,12 +143,7 @@ class MavenEnvironment extends StandardEnvironment {
     public void reportProgressMessage(String message) {
         logger_.info(message);
     }
-/*
-    @Override
-    public FileGenerator<? extends CtElement> getDefaultFileGenerator() {
-        return super.getDefaultFileGenerator();
-    }
-*/
+
     public boolean hasWarning() throws Exception {
         return warningCount_ > 0;
     }
