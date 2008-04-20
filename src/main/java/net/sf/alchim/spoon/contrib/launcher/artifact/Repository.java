@@ -66,6 +66,15 @@ public class Repository {
             Document document = builder.parse(m2settings);
             back = DomHelper.findFirstValue(document, "localRepository");
         }
+        if ((back == null) && (System.getProperty("maven.home") != null)){
+            m2settings = new File(System.getProperty("maven.home"), "conf/settings.xml");
+            if (m2settings.exists()) {
+                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder builder = factory.newDocumentBuilder();
+                Document document = builder.parse(m2settings);
+                back = DomHelper.findFirstValue(document, "localRepository");
+            }
+        }
         if (back == null) {
             back = System.getProperty("user.home") + "/.m2/repository";
         }
