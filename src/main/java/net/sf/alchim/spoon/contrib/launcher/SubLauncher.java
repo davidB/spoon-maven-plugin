@@ -80,7 +80,11 @@ public class SubLauncher {
                 builder.addTemplateSource(f);
             }
             if (!builder.build()) {
-                throw new Exception("pre build failed");
+                StringBuilder str = new StringBuilder();
+                for(String v: builder.getProblems()) {
+                    str.append("\n\t>> ").append(v);
+                }
+                throw new Exception("pre build failed :" + str.toString());
             }
         } finally {
             System.setProperty("java.class.path", oldClasspath);

@@ -65,6 +65,7 @@ public abstract class AbstractSpoonMojo extends AbstractMojo {
     /**
      * @parameter expression="${project}"
      * @required
+     * @readonly
      */
     protected MavenProject project;
 

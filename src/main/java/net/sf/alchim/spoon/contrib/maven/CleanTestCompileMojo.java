@@ -2,8 +2,6 @@ package net.sf.alchim.spoon.contrib.maven;
 
 import java.util.List;
 
-import org.apache.maven.project.MavenProject;
-
 /**
  * Restore sourceDirectory to original.
  *
@@ -13,12 +11,6 @@ import org.apache.maven.project.MavenProject;
  * @author dwayne
  */
 public class CleanTestCompileMojo extends AbstractCleanMojo {
-
-    /**
-     * @parameter expression="${project}"
-     * @required
-     */
-    private MavenProject project;
 
     @SuppressWarnings({ "unchecked", "cast" })
     @Override()

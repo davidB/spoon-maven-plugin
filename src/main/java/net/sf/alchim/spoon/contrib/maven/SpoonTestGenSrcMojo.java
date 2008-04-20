@@ -14,11 +14,9 @@ public class SpoonTestGenSrcMojo extends AbstractSpoonMojo {
     /**
      * The directory for generated java files.
      *
-     * @parameter expression="${project.build.directory}/generated-test-sources/spoon"
-     * @required
-     * @readonly
+     * @parameter expression=="${maven.spoon.test.srcOutputDirectory}" default-value="${project.build.directory}/generated-test-sources/spoon"
      */
-    private File srcOutputDirectory;
+    protected File srcOutputDirectory;
 
     @SuppressWarnings("unchecked")
     @Override()

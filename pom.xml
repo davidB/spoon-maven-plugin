@@ -8,10 +8,12 @@
 		<version>3</version>
 	</parent>
 	<artifactId>spoon-maven-plugin</artifactId>
-	<version>0.7</version>
+	<version>0.7.1</version>
 	<packaging>maven-plugin</packaging>
 	<name>Spoon Maven Plugin</name>
-	<description>A maven plugin to use spoonlet(s) in a maven build</description>
+	<description><![CDATA[
+      A maven plugin to use spoonlet(s) in a maven 2 build. Spoonlets (and dependencies) are downloaded if needed.
+    ]]></description>
     <inceptionYear>2006</inceptionYear>
 	<prerequisites>
 		<maven>2.0.7</maven>
@@ -47,10 +49,12 @@
 			<artifactId>classworlds</artifactId>
 			<version>1.1</version>
 		</dependency>
+    <!-- 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-io</artifactId>
 		</dependency>
+     -->
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-plugin-api</artifactId>

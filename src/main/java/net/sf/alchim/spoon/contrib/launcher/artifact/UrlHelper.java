@@ -8,7 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 
-import org.apache.commons.io.IOUtils;
+import org.codehaus.plexus.util.IOUtil;
 
 class UrlHelper {
 
@@ -32,10 +32,10 @@ class UrlHelper {
             out = new FileOutputStream(dest);
             URLConnection cnx = src.openConnection();
             in = cnx.getInputStream();
-            IOUtils.copy(in, out);
+            IOUtil.copy(in, out);
         } finally {
-            IOUtils.closeQuietly(in);
-            IOUtils.closeQuietly(out);
+            IOUtil.close(in);
+            IOUtil.close(out);
         }
     }
 }

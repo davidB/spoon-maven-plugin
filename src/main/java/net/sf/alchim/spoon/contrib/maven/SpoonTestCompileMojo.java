@@ -14,20 +14,16 @@ public class SpoonTestCompileMojo extends AbstractSpoonMojo {
     /**
      * The directory for generated java files.
      *
-     * @parameter expression="${project.build.directory}/generated-test-sources/spoon"
-     * @required
-     * @readonly
+     * @parameter expression=="${maven.spoon.test.srcOutputDirectory}" default-value="${project.build.directory}/generated-test-sources/spoon"
      */
-    private File srcOutputDirectory;
+    protected File srcOutputDirectory;
 
     /**
      * The directory for generated java files.
      *
-     * @parameter expression="${project.build.directory}/test-classes"
-     * @required
-     * @readonly
+     * @parameter expression="${maven.spoon.test.classesOutputDirectory}" default-value="${project.build.directory}/test-classes"
      */
-    private File classesOutputDirectory;
+    protected File classesOutputDirectory;
 
 
     @SuppressWarnings("unchecked")

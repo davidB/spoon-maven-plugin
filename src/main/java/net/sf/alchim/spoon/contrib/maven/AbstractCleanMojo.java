@@ -1,15 +1,14 @@
     package net.sf.alchim.spoon.contrib.maven;
 
 
-import net.sf.alchim.spoon.contrib.launcher.Launcher;
-import net.sf.alchim.spoon.contrib.misc.PathHelper;
+import java.util.List;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.project.MavenProject;
 
-
-
-import java.util.List;
+import net.sf.alchim.spoon.contrib.launcher.Launcher;
+import net.sf.alchim.spoon.contrib.misc.PathHelper;
 
 /**
  * Restore sourceDirectory to original.
@@ -17,6 +16,12 @@ import java.util.List;
  * @author dwayne
  */
 public abstract class AbstractCleanMojo extends AbstractMojo {
+    /**
+     * @parameter expression="${project}"
+     * @required
+     * @readonly
+     */
+    protected MavenProject project;
 
     abstract protected List<String> getSourceRoots() throws Exception;
 

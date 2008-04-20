@@ -14,20 +14,16 @@ public class SpoonCompileMojo extends AbstractSpoonMojo {
     /**
      * The directory for generated java files.
      *
-     * @parameter expression="${project.build.directory}/generated-sources/spoon"
-     * @required
-     * @readonly
+     * @parameter expression="${maven.spoon.srcOutputDirectory}" default-value="${project.build.directory}/generated-sources/spoon"
      */
-    private File srcOutputDirectory;
+    protected File srcOutputDirectory;
 
     /**
      * The directory for generated java files.
      *
-     * @parameter expression="${project.build.directory}/classes"
-     * @required
-     * @readonly
+     * @parameter expression="${maven.spoon.classesOutputDirectory}" default-value="${project.build.directory}/classes"
      */
-    private File classesOutputDirectory;
+    protected File classesOutputDirectory;
 
     @SuppressWarnings("unchecked")
     @Override

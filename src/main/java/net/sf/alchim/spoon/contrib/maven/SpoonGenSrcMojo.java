@@ -13,21 +13,17 @@ public class SpoonGenSrcMojo extends AbstractSpoonMojo {
     /**
      * The directory for generated java files.
      *
-     * @parameter expression="${project.build.directory}/generated-sources/spoon"
-     * @required
-     * @readonly
+     * @parameter expression="${maven.spoon.srcOutputDirectory}" default-value="${project.build.directory}/generated-sources/spoon"
      */
-    private File srcOutputDirectory;
+    protected File srcOutputDirectory;
 
     /**
      * Set to false, if you don't want to generate java sources file
      * (usefull, if only use spoonlet as Analyzer).
      *
-     * @parameter expression="${spoon.generate-sources}" default="true"
-     * @required
-     * @readonly
+     * @parameter expression="${maven.spoon.generateSources}" default-value="true"
      */
-    private boolean generateSources;
+    protected boolean generateSources;
 
     @SuppressWarnings("unchecked")
     @Override

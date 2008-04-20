@@ -33,49 +33,43 @@ public class SpoonReportMojo extends AbstractMavenReport {
      * Location where generated html will be created.
      *
      * @parameter default-value="${project.reporting.outputDirectory}"
-     * @required
      */
-    private String outputDirectory;
+    protected String outputDirectory;
 
     /**
      * Doxia Site Renderer.
      *
      * @parameter expression="${component.org.apache.maven.doxia.siterenderer.Renderer}"
-     * @required
-     * @readonly
      */
-    private Renderer siteRenderer;
+    protected Renderer siteRenderer;
 
     /**
      * Maven Project
      *
      * @parameter expression="${project}"
-     * @required
-     * @readonly
      */
-    private MavenProject project;
+    protected MavenProject project;
 
     /**
      * Location of the Xrefs to link.
      *
      * @parameter default-value="${project.reporting.outputDirectory}/xref"
      */
-    private File xrefLocation;
+    protected File xrefLocation;
 
     /**
      * Whether to link the XRef if found.
      *
      * @parameter expression="${linkXRef}" default-value="true"
      */
-    private boolean linkXRef;
+    protected boolean linkXRef;
 
     /**
      * The path of the result/log of spoon compiler/analyzer.
      *
      * @parameter expression="${project.build.directory}/spoon-report.csv"
-     * @required
      */
-    private File reportDataFile;
+    protected File reportDataFile;
 
     @Override
     protected String getOutputDirectory() {

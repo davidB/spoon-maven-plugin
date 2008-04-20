@@ -165,7 +165,9 @@ public class Launcher {
         spoonletsRealm.setParent(realm);
 
         // add all the jars we just downloaded to the new child realm
-        spoonletsRealm.addConstituent(env_.getDefaultFileGenerator().getOutputDirectory().toURL());
+        if (env_.getDefaultFileGenerator() != null) {
+            spoonletsRealm.addConstituent(env_.getDefaultFileGenerator().getOutputDirectory().toURL());
+        }
         List<URL> alreadyInLoader = ClasspathHelper.scan(Thread.currentThread().getContextClassLoader(), false);
         List<File> fileInLoader = new ArrayList<File>(alreadyInLoader.size());
         for (URL url : alreadyInLoader) {

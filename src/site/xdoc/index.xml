@@ -1,9 +1,0 @@
-<document>
-<properties>
-  <author email="dwayneb@users.sourceforge.net">David Bernard</author>
-  </properties>
-  <meta name="keyword" content="java, spoon, spoonlet, maven"/>
- <body>
- <p>A maven plugin to use spoonlet(s) in a maven 2 build. Spoonlets (and dependencies) are downloaded if needed.</p>
-</body>
-</document>
