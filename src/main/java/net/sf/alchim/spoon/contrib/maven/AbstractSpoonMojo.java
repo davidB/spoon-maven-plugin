@@ -1,8 +1,11 @@
 package net.sf.alchim.spoon.contrib.maven;
 
 
+
 import java.io.File;
 import java.util.List;
+
+import net.sf.alchim.spoon.contrib.launcher.Launcher;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -11,8 +14,6 @@ import org.apache.maven.project.MavenProject;
 import spoon.processing.FileGenerator;
 import spoon.support.ByteCodeOutputProcessor;
 import spoon.support.JavaOutputProcessor;
-
-import net.sf.alchim.spoon.contrib.launcher.Launcher;
 
 /**
  * Apply a set of spoonlet and Spoon's processor.
@@ -76,7 +77,14 @@ public abstract class AbstractSpoonMojo extends AbstractMojo {
      * @required
      */
     private File reportDataFile;
-
+    
+    /**
+     * A list of system properties to be passed. 
+     *
+     * @parameter
+     */
+    private Property[] systemProperties;
+    
     abstract protected List<String> getSourceRoots() throws Exception;
     abstract protected File getSrcOutputDir() throws Exception;
     abstract protected File getClassesOutputDir() throws Exception;
@@ -125,6 +133,8 @@ public abstract class AbstractSpoonMojo extends AbstractMojo {
     private void executeBasic() throws Throwable {
         Launcher launcher = new Launcher();
         MavenEnvironment env = newEnvironment();
+        for(Property p:systemProperties)
+            System.setProperty(p.getKey(), (p.getValue()!=null)?p.getValue():"");
         launcher.run(cfg, getSourceRoots(), getCompileDependencies(), env);
         if (failOnError && env.hasError()) {
             throw new MojoExecutionException("spoon generate some errors");
