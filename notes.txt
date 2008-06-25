@@ -1,0 +1,15 @@
+* define a launcher with no CLI/JSAP, Ant, Eclipse, Maven depency, only from Environment, a launcher usable by every context
+* remove getter that do indirection, or depends of other properties (getEnvironment that depend of getFactory)
+* remove final on methods (like AbstractProcessor.setFactory)
+* simplify and clean the API (public and private) => simplify package hierarchy
+* remove from the code "e.printStackTrace()", and provide a Environment.report method that support exception
+* provide a Environment.report method that support parameters (like slf4j) or format (like String.format) or replace the method by Logger (slf4j or java.logging)
+* clean the usage of generics syntax (cf eclipse warning), by example in StandardEnvironment there is a mixe of FileGenerator, FileGenerator<?> and FileGenerator<? extends CtElement> (item with CtSimpleType)
+* fix inconsistancy of method signature between interface and implementations (ex getDefaultFileGenerator of Environment mismatch StandardEnvironment (correct at byte code level due to type erasure) but not at source code level).
+  and generate error like (when is compiled with regular sun jdk) when I try to create my own Environment that extends StandardEnvironment
+    incompatible types
+      found   : spoon.processing.FileGenerator<capture of ?>
+      required: spoon.processing.FileGenerator<? extends spoon.reflect.declaration.CtElement>
+
+* clean up the code (cf eclipse warning/problems, pmd/cpd reports)
+* why declaring template in spoon.xml, why not search template into the classpath like class and access it like any resource?
