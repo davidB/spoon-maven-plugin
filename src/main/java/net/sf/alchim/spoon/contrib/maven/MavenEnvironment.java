@@ -19,9 +19,11 @@ class MavenEnvironment extends StandardEnvironment {
     private int warningCount_;
     private int errorCount_;
     private FileWriter reportDataWriter_;
+    private File baseDir_;
 
-    public MavenEnvironment(Log log, File reportDataFile) throws Exception {
+    public MavenEnvironment(File baseDir, Log log, File reportDataFile) throws Exception {
         logger_ = log;
+        baseDir_ = baseDir;
         if (reportDataFile != null) {
             FileUtils.forceDelete(reportDataFile);
             reportDataFile.getParentFile().mkdirs();
@@ -150,5 +152,10 @@ class MavenEnvironment extends StandardEnvironment {
 
     public boolean hasError() throws Exception {
         return errorCount_ > 0;
+    }
+    
+    public String getSourcePath()
+    {
+        return baseDir_.getPath();
     }
 }
