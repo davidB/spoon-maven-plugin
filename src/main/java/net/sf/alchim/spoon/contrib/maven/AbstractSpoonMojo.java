@@ -106,7 +106,7 @@ public abstract class AbstractSpoonMojo extends AbstractMojo {
     }
 
     protected MavenEnvironment newEnvironment() throws Exception {
-        MavenEnvironment environment = new MavenEnvironment(getLog(), reportDataFile);
+        MavenEnvironment environment = new MavenEnvironment(project.getBasedir(), getLog(), reportDataFile);
         environment.setComplianceLevel(compliance);
         environment.setVerbose(verbose || debug);
         environment.setDebug(debug);
